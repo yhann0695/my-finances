@@ -1,0 +1,63 @@
+<section class="h-100">
+    <app-mensagem #appMensagem></app-mensagem>
+    <div class="container h-100">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="text-center my-5">
+                    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100">
+                </div>
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h1 class="fs-4 card-title fw-bold mb-4">Conecte-se</h1>
+                        <form  [formGroup]="loginForm" (ngSubmit)="onSubmit();" class="needs-validation" novalidate="" autocomplete="off">
+            <!-- USUÁRIO -->
+                            <div class="mb-3">
+                                <label class="mb-2 text-muted" for="email">Login</label>
+                                <input type="text" formControlName="username" [ngClass]="{ 'is-invalid': isInvalid('username') , 'is-valid': isValid('username')}" class="form-control" autofocus>									
+                                <div *ngIf="isInvalid('username')" class="invalid-feedback">
+                                    <div>Informe um login</div>
+                                </div>
+                            </div>
+            <!-- USUÁRIO -->
+
+            <!-- SENHA -->
+                            <div class="mb-3">
+                                <div class="mb-2 w-100">
+                                    <label class="text-muted" for="password">Senha</label>
+                                    <!-- <a href="#" class="float-end">
+                                        Forgot Password?
+                                    </a> -->
+                                </div>
+                                <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': isInvalid('password') , 'is-valid': isValid('password')}" class="form-control" >
+                                <div *ngIf="isInvalid('password')" class="invalid-feedback">
+                                    <div>Informe uma senha</div>
+                                </div>
+                            </div>
+            <!-- SENHA -->
+
+
+                            <div class="d-flex align-items-center">
+                                <div class="form-check">
+                                    <!-- <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                                    <label for="remember" class="form-check-label">Remember Me</label> -->
+                                </div>
+                                <button type="submit" class="btn btn-primary ms-auto">
+                                    Entrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer py-3 border-0">
+                        <div class="text-center">
+                            Ainda não tem uma conta? <a routerLink="/usuario-cadastro" class="text-dark">Crie uma!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5 text-muted">
+                    Copyright &copy; 2021-2021 &mdash; Your Company 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,58 @@
+<section class="container px-4 mt-4">
+    <h1 class="text-center mb-1">Consultar Categorias</h1>
+<div class="card">
+    <p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle" acceptLabel="Sim" rejectLabel="Cancelar">
+    </p-confirmDialog>
+    <form [formGroup]="formularioPesquisa" class="row card-body"> 
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="nome" class="form-label mb-0">Categoria:</label>
+                <input type="text" id="nome" formControlName="nome" class="form-control" />
+            </div>
+            <div class="col-md-2 mt-4">
+                <button type="submit" (click)="consultar($event)" class="btn btn-success me-1"><i class="pi pi-search-plus"> Pesquisar</i></button>
+            </div>
+        </div>        
+    </form>
+<p-table [value]="consulta"  [lazy]="true" [loading]="loading" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="p-mt-3">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:80%" [pSortableColumn]="'nome'">Descrição<p-sortIcon [field]="'nome'"></p-sortIcon></th>
+            <th style="width:20%">Ações</th>    
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-categoria>
+        <tr>
+            <td hidden="true">{{categoria.id}}</td>
+            <td style="width:80%; font-weight: bold;">{{categoria.nome}}</td>  
+            <td style="width:10%; font-weight: bold;">
+                <button class="btn btn-primary" (click)="abrirModalConsultaLancamentos(categoria, $event)">Detalhes</button>
+            </td>
+            <td style="width:10%; font-weight: bold;">
+                <button class="btn btn-danger" (click)="excluir(categoria)">Excluir</button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-categoria>
+        <tr>
+            <td style="margin: 0 auto; text-align: center; line-height: 10px" [attr.colspan]="categoria">
+                <div>
+                    <p>Área de consulta das categorias,</p>
+                    <p>clicando em "pesquisar" será listado</p>
+                    <p>todas as categorias. caso esteja procurando</p>
+                    <p>uma categoria específica, informar uma descrição</p>
+                    <p>ou partes dela, é uma boa opção para que as buscas</p>
+                    <p>sejam realizadas.</p>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+<p-paginator [rows]="10" [totalRecords]="totalRegistros"  [rowsPerPageOptions]="[10,20,30]" (onPageChange)="paginate($event)"></p-paginator>
+</div>
+<div class="col-12">
+    <button type="button" routerLink="/home" class="btn btn-danger my-2 my-sm-0"><i class="pi pi-arrow-left"> Voltar</i></button>
+</div>
+
+<app-categoria-modal-lancamentos-por-categorias #appModalConsultaLancamentos></app-categoria-modal-lancamentos-por-categorias>
+</section>

@@ -1,0 +1,73 @@
+
+<p-dialog [(visible)]="display">
+    
+    <p-header>
+        Alterar Lançamento
+    </p-header>
+
+    <form [formGroup]="formAlteracao">
+        <div class="p-fluid">
+            <div class="row">
+                <div class="p-field col-6">
+                <label for="descricao">Descrição:</label>
+                <input id="descricao" [ngClass]="{ 'is-invalid': isInvalid('descricao') , 'is-valid': isValid('descricao')}" formControlName="descricao" type="text" pInputText/>
+                <div *ngIf="isInvalid('descricao')" class="invalid-feedback">
+                    <div>Informe uma descrição</div>
+                </div>
+            </div>
+            <div class="p-field col-6">
+                <label for="valor">Valor:</label>
+                <input id="valor" formControlName="valor" currencyMask="BRL" [ngClass]="{ 'is-invalid': isInvalid('valor') , 'is-valid': isValid('valor')}" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" type="text" pInputText/>
+                <div *ngIf="isInvalid('valor')" class="invalid-feedback">
+                    <div>Informe um valor</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="p-field col-6">
+                <label for="tipo">Tipo:</label>
+                <select formControlName="tipo" [ngClass]="{ 'is-invalid': isInvalid('tipo') , 'is-valid': isValid('tipo')}" class="form-select col-md-6" aria-label="Disabled select example">
+                    <option value="RECEITA">Receita</option>
+                    <option value="DESPESA">Despesa</option>
+                </select>
+                <div *ngIf="isInvalid('tipo')" class="invalid-feedback">
+                    <div>Informe um tipo</div>
+                </div>
+            </div>
+            <div class="p-field col-6">
+                <label>Categoria</label>
+                <select class="form-control col-md-6" formControlName="categorias" [ngClass]="{ 'is-invalid': isInvalid('categorias') , 'is-valid': isValid('categorias')}" id="categorias" >
+                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                        {{ categoria.nome }}
+                    </option>
+                </select>
+                <div *ngIf="isInvalid('categorias')" class="invalid-feedback">
+                    <div>Informe uma categoria </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="p-field col-6">
+                <label for="observacao">Observação:</label>
+                <textarea id="observacao" formControlName="observacao" type="text" pInputText></textarea>
+            </div>
+            <div class="p-field col-6">
+                <label>Forma de pagamento</label>
+                <select class="form-control col-md-6" formControlName="formaPagamento" [ngClass]="{ 'is-invalid': isInvalid('formaPagamento') , 'is-valid': isValid('formaPagamento')}" id="formaPagamento" >
+                    <option *ngFor="let formaPagamento of formaPagamentos" [ngValue]="formaPagamento.value">
+                        {{ formaPagamento.label }}
+                    </option>
+                </select>
+                <div *ngIf="isInvalid('formaPagamento')" class="invalid-feedback">
+                    <div>Informe uma forma de pagamento </div>
+                </div>
+            </div>
+        </div>
+        </div> 
+        <button type="button" (click)="alterar()" class="btn btn-success my-2 my-sm-0 ms-1"><i class="pi pi-check"> Alterar</i></button>
+    </form>
+
+    
+</p-dialog>
+
+

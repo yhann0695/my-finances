@@ -1,0 +1,18 @@
+<section class="container px-4 mt-4">
+    <h1 class="text-center mb-1">Cadastro de Categoria</h1>
+    <div class="card">
+        <form [formGroup]="formularioCadastro" class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <input type="text" id="nome" formControlName="nome" [ngClass]="{ 'is-invalid': isInvalid('nome') , 'is-valid': isValid('nome')}" class="form-control"placeholder="Informe o nome da categoria" />
+                    <div *ngIf="isInvalid('nome')" class="invalid-feedback">
+                        <div>Informe um nome para a categoria</div>
+                    </div>
+                    <div class="col-6">
+                        <button class="btn btn-primary col-6" (click)="cadastrar()">Criar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

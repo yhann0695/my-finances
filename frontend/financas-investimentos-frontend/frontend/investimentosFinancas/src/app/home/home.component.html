@@ -1,0 +1,67 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Painel</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Seus dados de consulta rápida</li>
+    </ol>
+    <p>{{dataHoje}}</p>
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-secondary text-white mb-4"> 
+                <div class="card-body" (change)="obterSaldo()">
+                    <span [ngStyle]="{'color': saldoUsuario < 0 ? 'red' : 'white'}">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    Saldo Atual: {{ saldoUsuario | currency }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body" (change)="obterSaldoDespesas()">
+                    <i class="fas fa-long-arrow-alt-down"></i>  
+                    Saídas: {{ saldoDespesas | currency }}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body" (change)="obterSaldoReceitas()">
+                    <i class="fas fa-long-arrow-alt-up"></i>
+                    Entradas: {{ saldoReceitas | currency }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Despesas do mês passado ({{mesAnterior}})
+                </div>
+                <div class="card-body pd-4 md-4 mb-4 mt-4">
+                        <p-chart type="line" [data]="pieChartDataMesAnterior" [options]="options"></p-chart>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar me-1 "></i>
+                    Despesas do mês atual ({{mesAtual}})
+                </div>
+                <div class="card-body pd-4 md-4 mb-4 mt-4">
+                        <p-chart type="bar" [data]="pieChartDataMes" [options]="options"></p-chart>
+                        <button class="btn btn-primary mt-2" (click)="gerarRelatorioLancamentosMensais()">Gerar relatório do mês (inclui receitas)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Últimos lançamentos realizados.
+    </div>
+    <div class="card-body">
+        <app-lancamento-listar></app-lancamento-listar>
+    </div>
+</div>

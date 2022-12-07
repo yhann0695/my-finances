@@ -1,0 +1,54 @@
+
+<p-dialog [(visible)]="display">
+    
+    <p-header>
+        Detalhes do lançamento
+    </p-header>
+
+    <form [formGroup]="formModal">
+        <div class="row">
+        <div class="p-fluid">
+            <div class="row">
+                <div class="p-field col-6">
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" formControlName="descricao" type="text" pInputText/>
+                </div>
+                <div class="p-field col-6">
+                    <label for="valor">Valor:</label>
+                    <input id="valor" formControlName="valor" currencyMask="BRL" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" type="text" pInputText/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="p-field col-6">
+                    <label for="tipo">Tipo:</label>
+                    <input id="tipo" formControlName="tipo" type="text" pInputText/>
+                </div>                
+                <div class="p-field col-6">
+                    <label for="formaPagamento">Forma de pagamento:</label>
+                    <input id="formaPagamento" formControlName="formaPagamento" type="text" pInputText/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="p-field col-6">
+                    <label for="dataCadastro">Data da criação:</label>
+                    <input id="dataCadastro" formControlName="dataCadastro" type="text" pInputText />
+                </div>           
+                <div class="p-field col-6">
+                    <label for="categorias">Categoria:</label>
+                    <input id="categorias" formControlName="categorias" type="text" pInputText>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+                <div class="p-field col-6">
+                    <label for="observacao">Observação:</label>
+                    <textarea id="observacao" formControlName="observacao" rows="3" cols="80" type="text" pInputText></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</p-dialog>
+

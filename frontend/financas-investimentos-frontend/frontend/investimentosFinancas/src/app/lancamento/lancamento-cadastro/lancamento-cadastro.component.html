@@ -1,0 +1,88 @@
+<section class="container px-4 mt-4">
+    <h1 class="text-center mb-1">Cadastro de Lançamento</h1>
+    <h6 style="color: red" class="text-center mb-1">Se não existir categorias, adicione uma antes de cadastrar um lançamento!</h6>
+    <div class="card">
+        <form [formGroup]="formularioCadastro" class="row g-3 card-body" enctype="multipart/form-data">
+            <div class="form-group col-md-4">
+                <label for="descricao" class="form-label mb-0">Descrição</label>
+                <input type="text" id="descricao" formControlName="descricao" [ngClass]="{ 'is-invalid': isInvalid('descricao') , 'is-valid': isValid('descricao')}" class="form-control" />
+                <div *ngIf="isInvalid('descricao')" class="invalid-feedback">
+                    <div>Informe uma descrição</div>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="valor" class="form-label mb-0">Valor</label>
+                <input type="text" id="valor" formControlName="valor" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" [ngClass]="{ 'is-invalid': isInvalid('valor') , 'is-valid': isValid('valor')}" class="form-control"/>
+                <div *ngIf="isInvalid('valor')" class="invalid-feedback">
+                    <div>Informe um valor</div>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Categoria</label>
+                <select class="form-control" id="categoria" [ngClass]="{ 'is-invalid': isInvalid('categoria') , 'is-valid': isValid('categoria')}" formControlName="categoria" name="categoria">
+                    <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                        {{categoria.nome}}
+                    </option>
+                </select>
+                <div *ngIf="isInvalid('categoria')" class="invalid-feedback">
+                    <div>Informe uma categoria </div>
+                </div>
+            </div>
+            <div class="form-group col-md-2" style="margin-top: 4%">
+               <p style="text-decoration: none; cursor: pointer; color:blue" (click)="apresentarModalCategoria()">Adicionar categoria + </p>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="mes" class="form-label mb-0">Tipo</label>
+                    <select formControlName="tipo" [ngClass]="{ 'is-invalid': isInvalid('tipo') , 'is-valid': isValid('tipo')}" class="form-select col-md-6" aria-label="Disabled select example">
+                        <option value="RECEITA">Receita</option>
+                        <option value="DESPESA">Despesa</option>
+                    </select>
+                    <div *ngIf="isInvalid('tipo')" class="invalid-feedback">
+                        <div>Informe um tipo</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 mt-2">
+                    <label>Forma de pagamento</label>
+                    <select class="form-control" id="formaPagamento" [ngClass]="{ 'is-invalid': isInvalid('formaPagamento') , 'is-valid': isValid('formaPagamento')}" formControlName="formaPagamento" name="formaPagamento">
+                        <option *ngFor="let formaPagamento of formaPagamentos" [ngValue]="formaPagamento.value">
+                            {{formaPagamento.label}}
+                        </option>
+                    </select>
+                    <div *ngIf="isInvalid('formaPagamento')" class="invalid-feedback">
+                        <div>Informe a forma de pagamento </div>
+                    </div>
+                </div>
+                <div class="p-field col-md-6"> 
+                    <label for="nomeArquivo">Caso seja necessário, adicione um documento.</label>
+                    <p-fileUpload 
+                        id="nomeArquivo"
+                        chooseLabel="Selecione o documento"
+                        basic="true"
+                        accept="application/pdf, image/*"
+                        name="nomeArquivo"
+                        [maxFileSize]="1000000" 
+                        invalidFileSizeMessageDetail="Tamanho máximo de 1 MB"
+                        invalidFileSizeMessageSummary="Tamanho inválido"
+                        invalidFileTypeMessageSummary="Extensão não permitida, apenas PDF."
+                        [showUploadButton]="false"
+                        [showCancelButton]="false"
+                        (onSelect)="onSelectFile($event)"
+                        (onRemove)="onRemoveFile($event)">
+                    </p-fileUpload>
+                </div>
+            </div> 
+            
+            <div class="form-floating">
+                <textarea formControlName="observacao" class="form-control" id="observacao" maxlength="50"></textarea>
+                <label for="observacao">Observação</label>
+            </div>
+            <small class="mt-0">Máximo de 50 caracteres</small>
+            <div class="col-12">
+                <button type="submit" id="btnCadastrar" (click)="cadastrar()" class="btn btn-success me-1">Cadastrar</button>
+                <button type="button" routerLink="/home" class="btn btn-danger my-2 my-sm-0">Voltar</button>
+            </div>
+        </form>
+    </div>
+    <app-lancamento-categoria-cadastrar #modalCategoria (emitirCategoria)="adicionaCategoria($event)"></app-lancamento-categoria-cadastrar>
+</section>

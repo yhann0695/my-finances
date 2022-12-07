@@ -1,0 +1,72 @@
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-sm-center h-100">
+            <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="text-center my-5">
+                    <img src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="logo" width="100">
+                </div>
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h1 class="fs-4 card-title fw-bold mb-4">Registrar</h1>
+                        <form [formGroup]="formularioCadastro" class="needs-validation" novalidate="" autocomplete="off">
+                            <div class="row">
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="name">Nome</label>
+                                    <input id="nome" type="text" class="form-control" [ngClass]="{ 'is-invalid': isInvalid('nome') , 'is-valid': isValid('nome')}" formControlName="nome" required autofocus>
+                                    <div *ngIf="isInvalid('nome')" class="invalid-feedback">
+                                        <div>Informe seu nome</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="sobrenome">Sobrenome</label>
+                                    <input id="sobrenome" type="text" class="form-control" [ngClass]="{ 'is-invalid': isInvalid('sobrenome') , 'is-valid': isValid('sobrenome')}" formControlName="sobrenome" required autofocus>
+                                    <div *ngIf="isInvalid('sobrenome')" class="invalid-feedback">
+                                        <div>Informe seu sobrenome</div>
+                                    </div>
+                                </div>
+                        
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="email">E-mail</label>
+                                    <input id="email" type="email" class="form-control" [ngClass]="{ 'is-invalid': isInvalid('email') , 'is-valid': isValid('email')}" formControlName="email" required>
+                                    <div *ngIf="isInvalid('email')" class="invalid-feedback">
+                                        <div>Informe seu email</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="username">Login</label>
+                                    <input id="username" type="text" class="form-control" [ngClass]="{ 'is-invalid': isInvalid('username') , 'is-valid': isValid('username')}" formControlName="username" required>
+                                    <div *ngIf="isInvalid('username')" class="invalid-feedback">
+                                        <div>Informe seu login</div>
+                                    </div>
+                                </div>
+                        
+                                <div class="mb-3">
+                                    <label class="mb-2 text-muted" for="password">Senha</label>
+                                    <input id="password" type="password" class="form-control" [ngClass]="{ 'is-invalid': isInvalid('password') , 'is-valid': isValid('password')}" formControlName="password" required>
+                                    <div *ngIf="isInvalid('password')" class="invalid-feedback">
+                                        <div>Informe sua senha</div>
+                                    </div>
+                                </div>
+                                <div class="align-items-center d-flex">
+                                    <button type="submit" id="btnCadastrar" class="btn btn-primary ms-auto" (click)="cadastrar()">
+                                        Cadastrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer py-3 border-0">
+                        <div class="text-center">
+                            Já é cadastrado? <a href="#" routerLink="/login" class="text-dark">Faça Login!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5 text-muted">
+                    Copyright &copy; 2017-2021 &mdash; Your Company 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

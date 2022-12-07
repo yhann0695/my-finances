@@ -1,0 +1,88 @@
+<section class="container px-4 mt-4">
+    <h1 class="text-center mb-1">Consultar Lançamentos</h1>
+    <div class="card">
+        <p-confirmDialog header="Atenção" icon="pi pi-exclamation-triangle" acceptLabel="Sim" rejectLabel="Cancelar">
+        </p-confirmDialog>
+        <form [formGroup]="formularioPesquisa" class="row card-body">  
+            <div class="form-group col-md-4 mt-2">
+                <label for="dataInicio" class="form-label mb-0">Data Início</label>
+                <input type="date" id="dataInicio" formControlName="dataInicio" [ngClass]="{ 'is-invalid': isInvalid('dataInicio') , 'is-valid': isValid('dataInicio')}" class="form-control" onkeydown="false" />
+                <div *ngIf="isInvalid('dataInicio')" class="invalid-feedback">
+                    <div>Informe a data de início</div>
+                </div>
+            </div>
+            <div class="form-group col-md-4 mt-2">
+                <label for="dataFim" class="form-label mb-0">Data Fim</label>
+                <input type="date" id="dataFim" formControlName="dataFim" [ngClass]="{ 'is-invalid': isInvalid('dataFim') , 'is-valid': isValid('dataFim')}" class="form-control" onkeydown="false" />
+                <div *ngIf="isInvalid('dataFim')" class="invalid-feedback">
+                    <div>Informe a data final</div>
+                </div>
+            </div>       
+                <div class="form-group col-md-4 mt-2">
+                    <label for="descricao" class="form-label mb-0">Descrição</label>
+                    <input type="text" id="descricao" [ngClass]="{'is-valid': isValid('descricao')}" formControlName="descricao" class="form-control" />
+                </div>
+            </form>
+            <p-table [value]="consulta" [lazy]="true" [loading]="loading" scrollDirection="both" [scrollable]="true" scrollHeight="400px" styleClass="p-mt-3">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width:33%" [pSortableColumn]="'descricao'">Descrição <p-sortIcon [field]="'descricao'"></p-sortIcon></th> 
+                        <th style="width:33%" [pSortableColumn]="'nomeArquivo'">Documento<p-sortIcon [field]="'nomeArquivo'"></p-sortIcon>
+                        </th>
+                        <th style="width:33%">Ações</th>    
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-lancamento>
+                    <tr>
+                        <td hidden="true">{{lancamento.id}}</td>
+                        <td style="width:33%; font-weight: bold;">{{lancamento.descricao}}</td>
+                        <td style="width:33%;">
+                            <button *ngIf="lancamento.nomeArquivo !== null " class="btn btn-primary" (click)="downloadArquivo(lancamento.nomeArquivo)" pTooltip="Download Documento" tooltipPosition="top">
+                                 {{lancamento.nomeArquivo}}
+                            </button>
+                        </td>
+                        <td style="width:33%">
+                            <button 
+                                type="button" (click)="abrirModal(lancamento)" 
+                                pTooltip="Detalhes" tooltipPosition="top" class="btn btn-info my-2 my-sm-0">
+                                <i class="pi pi-eye"></i>
+                            </button>
+                            <button 
+                                type="button" (click)="abrirModalAlteracao(lancamento)" 
+                                class="btn btn-primary my-2 my-sm-0 ms-1" pTooltip="Alterar" tooltipPosition="top">
+                                <i class="pi pi-pencil"></i>
+                            </button>
+                            <button 
+                                type="button" (click)="excluir(lancamento)"
+                                pTooltip="Excluír" tooltipPosition="top" 
+                                class="btn btn-danger my-2 my-sm-0 ms-1" >
+                                <i class="pi pi-trash"></i>
+                            </button>
+                        </td>    
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage" let-lancamentos>
+                    <tr>
+                        <td style="margin: 0 auto; text-align: center; line-height: 10px" [attr.colspan]="lancamentos">
+                            <div>
+                                <p>Área de consulta dos lançamentos,</p>
+                                <p>informar as datas é obrigatório para</p>
+                                <p>que as buscas sejam realizadas.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+                <p-paginator [rows]="10" [totalRecords]="totalRegistros"  [rowsPerPageOptions]="[10,20,30]"
+                     (onPageChange)="paginate($event)">   
+                </p-paginator>
+
+     
+            <div class="col-12">
+                <button type="submit" id="btnCadastrar" (click)="consultar($event)" class="btn btn-success me-1"><i class="pi pi-search-plus"> Consultar</i></button>
+                <button type="button" routerLink="/home" class="btn btn-danger my-2 my-sm-0"><i class="pi pi-arrow-left"> Voltar</i></button>
+            </div>
+            <app-lancamento-modal #modalDetalhes></app-lancamento-modal>
+            <app-lancamento-alterar #modalAlteracao></app-lancamento-alterar>
+        </div>
+    </section>
