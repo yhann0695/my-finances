@@ -20,6 +20,8 @@ você pode fazer login com a seguintes credenciais:
 login: teste
 senha: 123
 
+ou se prefereir, pode criar a sua própria conta.
+
 ```
 
 ## Imagens de apresentação do sistema.
