@@ -1,12 +1,13 @@
 # my-finances
 
 O projeto my-finances tem o dever de cuidar de suas finanças, ou pelo menos deveria.
-É um sistema que cadastra os lançamentos e os vincula com categorias, é possível acompanhar seus lançamentos e receitas por gráficos, existe o envio de e-mails mensalmente com um relatório para deixar sempre bem informado, além de também ter como gerar um relatório do mês sempre que quiser.
+É um sistema que cadastra os lançamentos e os vincula com categorias, é possível acompanhar suas despesas e receitas por gráficos, existe o envio de e-mails mensalmente com um relatório para deixar sempre bem informado, além de também ter como gerar um relatório do mês sempre que quiser.
 
 ## Pré-requisitos
 
 - Java 8
 - Angular 12.2
+- Node
 
 ## Usando
 
